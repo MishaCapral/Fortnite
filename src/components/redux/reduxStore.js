@@ -1,11 +1,13 @@
 import { applyMiddleware, combineReducers, legacy_createStore as createStore } from "redux";
-import { thunkMiddleware } from "redux-thunk";
+import thunkMiddleware from "redux-thunk";
+import mainPageReducer from "../mainPage/mainPageReducer";
 
 const reducers = combineReducers({
-  //page:reducer
+  mainPage: mainPageReducer,
 })
 
 const store = createStore(reducers, applyMiddleware(thunkMiddleware))
 
 window.store = store
+
 export default store
