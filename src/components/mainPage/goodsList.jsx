@@ -14,9 +14,10 @@ const GoodsList = (props) => {
   return items.map((goods, index) => (
     <Grid container alignItems="stretch" key={index}>
       {goods.map((item, index) => {
-        if (item.type.value === "backpack") {
+        // if (item.type.value === "backpack") {
+        if (index <= 50) {
           return (
-            <Grid item xs={12} md={2} key={index}>
+            <Grid item xs={12} md={2} key={item.id}>
               <Card key={item.id} sx={{ maxWidth: "100%", margin: "1rem" }}>
                 <CardActionArea>
                   <CardMedia

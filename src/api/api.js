@@ -14,5 +14,10 @@ export const goodsAPI = {
     return instance.get().then(response => {
       return response.data;
     })
+  },
+  getTypeItems(type) {
+    return instance.get('search/all?type=' + type).then(response => {
+      return response.data;
+    })
   }
 }

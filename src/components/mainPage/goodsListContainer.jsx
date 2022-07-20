@@ -1,34 +1,64 @@
-import React from "react";
-import { connect } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import GoodsList from "./goodsList";
-import { getItems } from "./mainPageReducer";
+import { getTypeItems } from "./mainPageReducer";
 import { Container } from "@mui/material";
 
-class goodsListAPIComponent extends React.Component {
-  componentDidMount() {
-    if (this.props.items.length === 0) {
-      this.props.getItems();
-    }
-  }
-  // this.props.getItems();
+const GoodsListAPIComponent = ({ type }) => {
+  const dispatch = useDispatch();
 
-  render() {
-    return (
-      <Container
-        sx={{
-          mt: "1rem",
-        }}
-      >
-        <GoodsList items={this.props.items} />
-      </Container>
-    );
-  }
-}
+  const items = useSelector((state) => state.mainPage.items);
+  // const typeItems = useSelector((state) => state.mainPage.typeItems);
+  // useEffect(() => {
+  //   const allItems = getAllItems();
+  //   allItems(dispatch);
+  // }, []);
 
-let mapStateToProps = (state) => {
-  return {
-    items: state.mainPage.items,
-  };
+  useEffect(() => {
+    const typeItems = getTypeItems(type);
+    typeItems(dispatch);
+  }, [type]);
+  return (
+    <Container
+      sx={{
+        mt: "1rem",
+      }}
+    >
+      <GoodsList items={items} />
+    </Container>
+  );
 };
 
-export default connect(mapStateToProps, { getItems })(goodsListAPIComponent);
+// class GoodsListAPIComponent extends React.Component {
+//   componentDidMount() {
+//     if (this.props.items.length === 0) {
+//       this.props.getTypeItems(this.props.typeItems);
+//     }
+//   }
+//   // this.props.getItems();
+
+//   render() {
+//     return (
+//       <Container
+//         sx={{
+//           mt: "1rem",
+//         }}
+//       >
+//         <GoodsList items={this.props.items} />
+//       </Container>
+//     );
+//   }
+// }
+
+// let mapStateToProps = (state) => {
+//   return {
+//     items: state.mainPage.items,
+//     typeItems: state.mainPage.typeItems,
+//   };
+// };
+
+// export default connect(mapStateToProps, { getAllItems, getTypeItems })(
+//   GoodsListAPIComponent
+// );
+
+export default GoodsListAPIComponent;

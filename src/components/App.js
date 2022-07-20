@@ -1,10 +1,14 @@
+
 import './App.css';
-import GoodsListContainer from './mainPage/goodsListContainer';
+//import GoodsListContainer from './mainPage/goodsListContainer';
+import VerticalTabs from './mainPage/tabsType';
+
 
 function App() {
   return (
     <div className="App">
-      <GoodsListContainer />
+      <VerticalTabs />
+      {/* <GoodsListContainer /> */}
       <p>Hello App</p>
     </div>
   );
