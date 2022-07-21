@@ -9,10 +9,19 @@ const instance = axios.create({
   } */
 });
 
+let getType = (arr) => {
+  return [...new Set(arr.map(item => item.type.value))]
+}
+
 export const goodsAPI = {
   getAllItems() {
     return instance.get().then(response => {
       return response.data;
+    })
+  },
+  getTypeCategory() {
+    return instance.get().then(response => {
+      return (getType(response.data.data));
     })
   },
   getTypeItems(type) {

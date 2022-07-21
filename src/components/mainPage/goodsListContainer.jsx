@@ -1,22 +1,24 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import GoodsList from "./goodsList";
-import { getTypeItems } from "./mainPageReducer";
+import { getTypeCategory, getTypeItems } from "./mainPageReducer";
 import { Container } from "@mui/material";
 
 const GoodsListAPIComponent = ({ type }) => {
   const dispatch = useDispatch();
 
   const items = useSelector((state) => state.mainPage.items);
-  // const typeItems = useSelector((state) => state.mainPage.typeItems);
-  // useEffect(() => {
-  //   const allItems = getAllItems();
-  //   allItems(dispatch);
-  // }, []);
 
   useEffect(() => {
-    const typeItems = getTypeItems(type);
-    typeItems(dispatch);
+    const types = getTypeCategory();
+    types(dispatch);
+  }, []);
+
+  useEffect(() => {
+    if (type !== null) {
+      const typedItems = getTypeItems(type);
+      typedItems(dispatch);
+    }
   }, [type]);
   return (
     <Container

@@ -2,12 +2,12 @@ import { goodsAPI } from "../../api/api";
 
 const SET_ITEMS = 'SET_ITEMS';
 const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING';
-//const TYPE_ITEMS = 'TYPE_ITEMS';
+const TYPE_CATEGORY = 'TYPE_CATEGORY';
 
 let initialState = {
   items: [],
   isFeatching: false,
-  typeItems: 'banner',
+  typeCategory: [null],
 }
 
 
@@ -16,10 +16,12 @@ const mainPageReducer = (state = initialState, action) => {
     return { ...state, items: [...action.items] }
   } else if (action.type === TOGGLE_IS_FETCHING) {
     return { ...state, isFeatching: action.isFeatching }
+  } else if (action.type === TYPE_CATEGORY) {
+    return {
+      ...state,
+      typeCategory: [...action.itemsWithType]
+    }
   }
-  //  else if (action.type === TYPE_ITEMS) {
-  //   return { ...state, typeItems: [...action.typeItems] }
-  // }
   return state
 }
 
@@ -27,8 +29,7 @@ const mainPageReducer = (state = initialState, action) => {
 
 export const setItems = (items) => ({ type: SET_ITEMS, items })
 export const setIsFetching = (isFeatching) => ({ type: TOGGLE_IS_FETCHING, isFeatching })
-//export const setTypeItems = (typeItems) => ({ type: TYPE_ITEMS, typeItems })
-
+export const setTypeCategory = (itemsWithType) => ({ type: TYPE_CATEGORY, itemsWithType })
 
 
 /*  Thunk  */
@@ -39,6 +40,11 @@ export const getAllItems = () => (dispatch) => {
     // dispatch(setIsFetching(false));
   })
 }
+export const getTypeCategory = () => (dispatch) => {
+  goodsAPI.getTypeCategory().then((data) => {
+    dispatch(setTypeCategory(data))
+  })
+}
 export const getTypeItems = (type) => (dispatch) => {
   dispatch(setIsFetching(true));
   goodsAPI.getTypeItems(type).then((data) => {
@@ -47,5 +53,4 @@ export const getTypeItems = (type) => (dispatch) => {
   })
 }
 
-console.log(initialState)
 export default mainPageReducer

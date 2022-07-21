@@ -5,6 +5,7 @@ import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import GoodsListAPIComponent from "./goodsListContainer";
+import { useSelector } from "react-redux";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -45,23 +46,23 @@ export default function VerticalTabs() {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-
-  const types = [
-    "outfit",
-    "banner",
-    "backpack",
-    "emote",
-    "emoji",
-    "glider",
-    "loadingscreen",
-    "music",
-    "pet",
-    "pickaxe",
-    "spray",
-    "toy",
-    "glider",
-    "wrap",
-  ];
+  const types = useSelector((state) => state.mainPage.typeCategory);
+  // const types = [
+  //   "outfit",
+  //   "banner",
+  //   "backpack",
+  //   "emote",
+  //   "emoji",
+  //   "glider",
+  //   "loadingscreen",
+  //   "music",
+  //   "pet",
+  //   "pickaxe",
+  //   "spray",
+  //   "toy",
+  //   "glider",
+  //   "wrap",
+  // ];
   const CapitalFirstLetter = (str) => {
     if (!str) return str;
     return str[0].toUpperCase() + str.slice(1);
