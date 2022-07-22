@@ -66,7 +66,6 @@ export default function VerticalTabs() {
     >
       <Tabs
         orientation="vertical"
-        //variant="scrollable"
         value={value}
         onChange={handleChange}
         aria-label="Vertical tabs example"

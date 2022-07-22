@@ -6,15 +6,14 @@ import {
   CardActionArea,
   Grid,
   Container,
-  Pagination,
 } from "@mui/material";
 import { useEffect, useState } from "react";
 import { goodsAPI } from "../../api/api";
+import Paginate from "./paginate";
 import SearchField from "./search";
 
 const GoodsList = ({ type }) => {
   const [items, setItems] = useState([]);
-  //pagination
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(30);
@@ -31,23 +30,22 @@ const GoodsList = ({ type }) => {
     }
   }, []);
 
+  // Pagination
   const lastItemsIndex = currentPage * itemsPerPage;
   const firstItemsIndex = lastItemsIndex - itemsPerPage;
   const currentItemsPage = items.slice(firstItemsIndex, lastItemsIndex);
-  //in pagination
 
   const totalItems = items.length;
   const pageNumbers = Math.ceil(totalItems / itemsPerPage);
 
   const paginate = (event, value) => setCurrentPage(value);
 
-  // search
+  // Search
   const [searchValue, setSearchValue] = useState("");
   const searchOnChange = (e) => {
     setSearchValue(e.target.value);
   };
   const fiteredItems = currentItemsPage.filter((itemSearch) => {
-    //filteredItems
     return itemSearch.name.toLowerCase().includes(searchValue.toLowerCase());
   });
 
@@ -71,7 +69,6 @@ const GoodsList = ({ type }) => {
       <SearchField onChange={searchOnChange} />
       <Grid container alignItems="stretch">
         {fiteredItems.map((goods, index) => {
-          //filteredItems
           return (
             <Grid item xs={12} md={2} key={goods.id}>
               <Card sx={{ maxWidth: "100%", margin: "1rem" }}>
@@ -95,7 +92,7 @@ const GoodsList = ({ type }) => {
           );
         })}
       </Grid>
-      <Pagination count={pageNumbers} defaultPage={1} onChange={paginate} />
+      <Paginate pageNumbers={pageNumbers} paginate={paginate} />
     </Container>
   );
 };
