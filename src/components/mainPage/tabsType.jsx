@@ -4,8 +4,8 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-import GoodsListAPIComponent from "./goodsListContainer";
 import { useSelector } from "react-redux";
+import GoodsList from "./goodsList";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -46,23 +46,11 @@ export default function VerticalTabs() {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
+  // --- my logic ---
+
   const types = useSelector((state) => state.mainPage.typeCategory);
-  // const types = [
-  //   "outfit",
-  //   "banner",
-  //   "backpack",
-  //   "emote",
-  //   "emoji",
-  //   "glider",
-  //   "loadingscreen",
-  //   "music",
-  //   "pet",
-  //   "pickaxe",
-  //   "spray",
-  //   "toy",
-  //   "glider",
-  //   "wrap",
-  // ];
+  console.log(types);
   const CapitalFirstLetter = (str) => {
     if (!str) return str;
     return str[0].toUpperCase() + str.slice(1);
@@ -94,7 +82,8 @@ export default function VerticalTabs() {
         //content
         <TabPanel value={value} index={index} key={index}>
           {CapitalFirstLetter(type)}
-          <GoodsListAPIComponent type={type} />
+
+          <GoodsList type={type} />
         </TabPanel>
       ))}
     </Box>

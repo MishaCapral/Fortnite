@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import GoodsList from "./goodsList";
 import { getTypeCategory, getTypeItems } from "./mainPageReducer";
 import { Container } from "@mui/material";
@@ -7,7 +7,7 @@ import { Container } from "@mui/material";
 const GoodsListAPIComponent = ({ type }) => {
   const dispatch = useDispatch();
 
-  const items = useSelector((state) => state.mainPage.items);
+  // const items = useSelector((state) => state.mainPage.items);
 
   useEffect(() => {
     const types = getTypeCategory();
@@ -26,7 +26,7 @@ const GoodsListAPIComponent = ({ type }) => {
         mt: "1rem",
       }}
     >
-      <GoodsList items={items} />
+      <GoodsList />
     </Container>
   );
 };

@@ -7,13 +7,13 @@ const TYPE_CATEGORY = 'TYPE_CATEGORY';
 let initialState = {
   items: [],
   isFeatching: false,
-  typeCategory: [null],
+  typeCategory: ['banner', 'backpack', 'petcarrier', 'pet', 'pickaxe', 'outfit', 'contrail', 'glider', 'emote', 'emoji', 'loadingscreen', 'music', 'spray', 'toy', 'wrap'],
 }
 
 
 const mainPageReducer = (state = initialState, action) => {
   if (action.type === SET_ITEMS) {
-    return { ...state, items: [...action.items] }
+    return { ...state, items: action.items }
   } else if (action.type === TOGGLE_IS_FETCHING) {
     return { ...state, isFeatching: action.isFeatching }
   } else if (action.type === TYPE_CATEGORY) {

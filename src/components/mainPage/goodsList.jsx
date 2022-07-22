@@ -5,46 +5,99 @@ import {
   Typography,
   CardActionArea,
   Grid,
+  Container,
+  Pagination,
 } from "@mui/material";
+import { useEffect, useState } from "react";
+import { goodsAPI } from "../../api/api";
+import SearchField from "./search";
 
-const GoodsList = (props) => {
-  let items = props.items;
-  window.items = items;
+const GoodsList = ({ type }) => {
+  const [items, setItems] = useState([]);
+  //pagination
+  const [loading, setLoading] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage] = useState(30);
 
-  return items.map((goods, index) => (
-    <Grid container alignItems="stretch" key={index}>
-      {goods.map((item, index) => {
-        // if (item.type.value === "backpack") {
-        if (index <= 30) {
+  useEffect(() => {
+    const getTypedItems = async () => {
+      const result = await goodsAPI.getTypeItems(type);
+      setItems(...[result.data]);
+    };
+    if (type !== null) {
+      setLoading(true);
+      getTypedItems(type);
+      setLoading(false);
+    }
+  }, []);
+
+  const lastItemsIndex = currentPage * itemsPerPage;
+  const firstItemsIndex = lastItemsIndex - itemsPerPage;
+  const currentItemsPage = items.slice(firstItemsIndex, lastItemsIndex);
+  //in pagination
+
+  const totalItems = items.length;
+  const pageNumbers = Math.ceil(totalItems / itemsPerPage);
+
+  const paginate = (event, value) => setCurrentPage(value);
+
+  // search
+  const [searchValue, setSearchValue] = useState("");
+  const searchOnChange = (e) => {
+    setSearchValue(e.target.value);
+  };
+  const fiteredItems = currentItemsPage.filter((itemSearch) => {
+    //filteredItems
+    return itemSearch.name.toLowerCase().includes(searchValue.toLowerCase());
+  });
+
+  if (loading) {
+    return (
+      <Container
+        sx={{
+          mt: "1rem",
+        }}
+      >
+        <h1>Loading...</h1>
+      </Container>
+    );
+  }
+  return (
+    <Container
+      sx={{
+        mt: "1rem",
+      }}
+    >
+      <SearchField onChange={searchOnChange} />
+      <Grid container alignItems="stretch">
+        {fiteredItems.map((goods, index) => {
+          //filteredItems
           return (
-            <Grid item xs={12} md={2} key={item.id}>
-              <Card key={item.id} sx={{ maxWidth: "100%", margin: "1rem" }}>
+            <Grid item xs={12} md={2} key={goods.id}>
+              <Card sx={{ maxWidth: "100%", margin: "1rem" }}>
                 <CardActionArea>
                   <CardMedia
                     component="img"
-                    image={item.images.smallIcon}
+                    image={goods.images.smallIcon}
                     alt="img"
                   />
                   <CardContent>
                     <Typography gutterBottom variant="h6" component="p">
-                      {item.name}
+                      {goods.name}
                     </Typography>
                     <Typography gutterBottom variant="p" component="p">
-                      {item.description}
+                      {goods.description}
                     </Typography>
                   </CardContent>
-                  {/* <p>{item.name}</p>
-              <p>{item.description}</p>
-              <br></br> */}
                 </CardActionArea>
               </Card>
             </Grid>
           );
-        }
-        return null;
-      })}
-    </Grid>
-  ));
+        })}
+      </Grid>
+      <Pagination count={pageNumbers} defaultPage={1} onChange={paginate} />
+    </Container>
+  );
 };
 
 export default GoodsList;
