@@ -1,4 +1,5 @@
-import * as React from "react";
+import React from "react";
+import { useState } from "react";
 import PropTypes from "prop-types";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
@@ -41,7 +42,7 @@ function a11yProps(index) {
 }
 
 export default function VerticalTabs() {
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = useState(0);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -49,8 +50,27 @@ export default function VerticalTabs() {
 
   // --- my logic ---
 
-  const types = useSelector((state) => state.mainPage.typeCategory);
+  //const types = useSelector((state) => state.mainPage.typeCategory);
+  //console.log(types);
+  const [types, setTypes] = useState([
+    "banner",
+    "backpack",
+    "petcarrier",
+    "pet",
+    "pickaxe",
+    "outfit",
+    "contrail",
+    "glider",
+    "emote",
+    "emoji",
+    "loadingscreen",
+    "music",
+    "spray",
+    "toy",
+    "wrap",
+  ]);
   console.log(types);
+
   const CapitalFirstLetter = (str) => {
     if (!str) return str;
     return str[0].toUpperCase() + str.slice(1);

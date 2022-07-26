@@ -7,7 +7,7 @@ const TYPE_CATEGORY = 'TYPE_CATEGORY';
 let initialState = {
   items: [],
   isFeatching: false,
-  typeCategory: ['banner', 'backpack', 'petcarrier', 'pet', 'pickaxe', 'outfit', 'contrail', 'glider', 'emote', 'emoji', 'loadingscreen', 'music', 'spray', 'toy', 'wrap'],
+  // typeCategory: ['banner', 'backpack', 'petcarrier', 'pet', 'pickaxe', 'outfit', 'contrail', 'glider', 'emote', 'emoji', 'loadingscreen', 'music', 'spray', 'toy', 'wrap'],
 }
 
 

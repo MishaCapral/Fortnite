@@ -7,7 +7,7 @@ import {
   Grid,
   Container,
 } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { goodsAPI } from "../../api/api";
 import Paginate from "./paginate";
 import SearchField from "./search";
@@ -18,11 +18,12 @@ const GoodsList = ({ type }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(30);
 
+  const getTypedItems = useCallback(async () => {
+    const result = await goodsAPI.getTypeItems(type);
+    setItems(...[result.data]);
+  }, []);
+
   useEffect(() => {
-    const getTypedItems = async () => {
-      const result = await goodsAPI.getTypeItems(type);
-      setItems(...[result.data]);
-    };
     if (type !== null) {
       setLoading(true);
       getTypedItems(type);

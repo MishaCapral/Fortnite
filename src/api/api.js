@@ -15,18 +15,14 @@ let getType = (arr) => {
 
 export const goodsAPI = {
   getAllItems() {
-    return instance.get().then(response => {
-      return response.data;
-    })
+    return instance.get().then(({ data }) => data)
   },
   getTypeCategory() {
-    return instance.get().then(response => {
-      return (getType(response.data.data));
+    return instance.get().then(({ data: responseData }) => {
+      return (getType(responseData.data));
     })
   },
   getTypeItems(type) {
-    return instance.get('search/all?type=' + type).then(response => {
-      return response.data;
-    })
+    return instance.get('search/all?type=' + type).then(({ data }) => data)
   }
 }
