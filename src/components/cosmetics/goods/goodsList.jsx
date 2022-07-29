@@ -1,16 +1,9 @@
-import {
-  Card,
-  CardMedia,
-  CardContent,
-  Typography,
-  CardActionArea,
-  Grid,
-  Container,
-} from "@mui/material";
+import { Box, Container } from "@mui/material";
 import { useEffect, useState, useCallback } from "react";
-import { goodsAPI } from "../../api/api";
-import Paginate from "./paginate";
-import SearchField from "./search";
+import { goodsAPI } from "../../../api/api";
+import Paginate from "../paginationAndSearch/paginate";
+import SearchField from "../paginationAndSearch/search";
+import GoodsCard from "./goodsCard";
 
 const GoodsList = ({ type }) => {
   const [items, setItems] = useState([]);
@@ -61,39 +54,27 @@ const GoodsList = ({ type }) => {
       </Container>
     );
   }
+
   return (
-    <Container
-      sx={{
-        mt: "1rem",
-      }}
-    >
-      <SearchField onChange={searchOnChange} />
-      <Grid container alignItems="stretch">
-        {fiteredItems.map((goods, index) => {
-          return (
-            <Grid item xs={12} md={2} key={goods.id}>
-              <Card sx={{ maxWidth: "100%", margin: "1rem" }}>
-                <CardActionArea>
-                  <CardMedia
-                    component="img"
-                    image={goods.images.smallIcon}
-                    alt="img"
-                  />
-                  <CardContent>
-                    <Typography gutterBottom variant="h6" component="p">
-                      {goods.name}
-                    </Typography>
-                    <Typography gutterBottom variant="p" component="p">
-                      {goods.description}
-                    </Typography>
-                  </CardContent>
-                </CardActionArea>
-              </Card>
-            </Grid>
-          );
-        })}
-      </Grid>
-      <Paginate pageNumbers={pageNumbers} paginate={paginate} />
+    <Container>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: {
+            xs: "column",
+            sm: "row",
+          },
+          justifyContent: "space-around",
+          alignItems: "center",
+          mb: "0.5rem",
+          width: "100%",
+        }}
+      >
+        <SearchField onChange={searchOnChange} />
+        <Paginate pageNumbers={pageNumbers} paginate={paginate} />
+      </Box>
+
+      <GoodsCard fiteredItems={fiteredItems} />
     </Container>
   );
 };

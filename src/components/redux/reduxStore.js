@@ -1,6 +1,6 @@
 import { applyMiddleware, combineReducers, legacy_createStore as createStore } from "redux";
 import thunkMiddleware from "redux-thunk";
-import mainPageReducer from "../mainPage/mainPageReducer";
+import mainPageReducer from "../cosmetics/mainPageReducer";
 
 const reducers = combineReducers({
   mainPage: mainPageReducer,

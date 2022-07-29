@@ -1,0 +1,14 @@
+.navlink {
+  padding: 10px;
+  color: white;
+  text-decoration: none;
+}
+.navlinkMobile {
+  color: black;
+  text-decoration: none;
+  margin: 0 auto;
+}
+.active-navlink {
+  border-bottom: 2px solid white;
+  color: red;
+}

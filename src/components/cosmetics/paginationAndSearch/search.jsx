@@ -8,13 +8,11 @@ const SearchField = (props) => {
     <Box>
       <TextField
         label="search"
-        variant="standard"
+        size="small"
+        variant="outlined"
         type="search"
         value={value}
         onChange={onChange}
-        sx={{
-          mt: "1.5rem",
-        }}
       />
     </Box>
   );
