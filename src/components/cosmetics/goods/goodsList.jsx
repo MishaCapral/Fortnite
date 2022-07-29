@@ -1,4 +1,4 @@
-import { Box, Container } from "@mui/material";
+import { Box, CircularProgress, Container, Typography } from "@mui/material";
 import { useEffect, useState, useCallback } from "react";
 import { goodsAPI } from "../../../api/api";
 import Paginate from "../paginationAndSearch/paginate";
@@ -12,17 +12,17 @@ const GoodsList = ({ type }) => {
   const [itemsPerPage] = useState(30);
 
   const getTypedItems = useCallback(async () => {
+    setLoading(true);
     const result = await goodsAPI.getTypeItems(type);
     setItems(...[result.data]);
-  }, []);
+    setLoading(false);
+  }, [type]);
 
   useEffect(() => {
     if (type !== null) {
-      setLoading(true);
       getTypedItems(type);
-      setLoading(false);
     }
-  }, []);
+  }, [type]);
 
   // Pagination
   const lastItemsIndex = currentPage * itemsPerPage;
@@ -47,36 +47,50 @@ const GoodsList = ({ type }) => {
     return (
       <Container
         sx={{
-          mt: "1rem",
+          width: "100%",
+          height: "100vh",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
         }}
       >
-        <h1>Loading...</h1>
+        <Box>
+          <CircularProgress size={50} />
+        </Box>
+      </Container>
+    );
+  } else {
+    return (
+      <Container>
+        <Box>
+          <Typography variant="h5" component="div">
+            All fortnite {type}
+          </Typography>
+          <Typography variant="p" component="div">
+            found {totalItems} items
+          </Typography>
+        </Box>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: {
+              xs: "column",
+              sm: "row",
+            },
+            justifyContent: "space-around",
+            alignItems: "center",
+            mb: "0.5rem",
+            width: "100%",
+          }}
+        >
+          <SearchField onChange={searchOnChange} />
+          <Paginate pageNumbers={pageNumbers} paginate={paginate} />
+        </Box>
+
+        <GoodsCard fiteredItems={fiteredItems} />
       </Container>
     );
   }
-
-  return (
-    <Container>
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: {
-            xs: "column",
-            sm: "row",
-          },
-          justifyContent: "space-around",
-          alignItems: "center",
-          mb: "0.5rem",
-          width: "100%",
-        }}
-      >
-        <SearchField onChange={searchOnChange} />
-        <Paginate pageNumbers={pageNumbers} paginate={paginate} />
-      </Box>
-
-      <GoodsCard fiteredItems={fiteredItems} />
-    </Container>
-  );
 };
 
 export default GoodsList;

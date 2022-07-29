@@ -58,10 +58,6 @@ const TypeLayout = () => {
     "toy",
     "wrap",
   ];
-  const CapitalFirstLetter = (str) => {
-    if (!str) return str;
-    return str[0].toUpperCase() + str.slice(1);
-  };
   const mediumViewport = useMediaQuery("(min-width:900px)");
   return (
     <Grid
@@ -93,7 +89,6 @@ const TypeLayout = () => {
         {types.map((type, index) => (
           // Content
           <TabPanel value={value} index={index} key={index}>
-            {CapitalFirstLetter(type)}
             <GoodsList type={type} />
           </TabPanel>
         ))}

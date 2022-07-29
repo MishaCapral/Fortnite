@@ -22,6 +22,9 @@ const GoodsCard = ({ fiteredItems }) => {
             >
               <CardActionArea
                 sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "flex-start",
                   height: "100%",
                 }}
               >
