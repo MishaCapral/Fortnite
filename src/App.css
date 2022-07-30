@@ -1,3 +1,13 @@
+:root {
+  --background-main: #404040;
+  --main-yellow: #fce200;
+  --text-grey: rgba(255, 255, 255, 0.7);
+}
 .App {
   text-align: center;
+}
+
+main,
+html {
+  background-color: var(--background-main);
 }

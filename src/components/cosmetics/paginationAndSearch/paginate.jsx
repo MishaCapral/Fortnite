@@ -7,7 +7,10 @@ const Paginate = (props) => {
   return (
     <Box
       sx={{
-        border: "1px solid #c4c4c4",
+        "&:hover": {
+          borderColor: "var(--main-yellow)",
+        },
+        border: "1px solid rgb(108,108,108)",
         borderRadius: "4px",
         width: {
           xs: "auto",
@@ -23,6 +26,7 @@ const Paginate = (props) => {
         defaultPage={1}
         onChange={paginate}
         sx={{
+          color: "var(--text-grey)",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",

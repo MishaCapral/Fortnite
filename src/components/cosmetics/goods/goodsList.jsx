@@ -1,3 +1,4 @@
+import { Palette } from "@mui/icons-material";
 import { Box, CircularProgress, Container, Typography } from "@mui/material";
 import { useEffect, useState, useCallback } from "react";
 import { goodsAPI } from "../../../api/api";
@@ -63,10 +64,10 @@ const GoodsList = ({ type }) => {
     return (
       <Container>
         <Box>
-          <Typography variant="h5" component="div">
+          <Typography variant="h5" sx={{ color: "var(--main-yellow)" }}>
             All fortnite {type}
           </Typography>
-          <Typography variant="p" component="div">
+          <Typography variant="subtitle1" sx={{ color: "var(--text-grey)" }}>
             found {totalItems} items
           </Typography>
         </Box>

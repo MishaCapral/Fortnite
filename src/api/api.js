@@ -24,5 +24,8 @@ export const goodsAPI = {
   },
   getTypeItems(type) {
     return instance.get('search/all?type=' + type).then(({ data }) => data)
-  }
+  },
+  getItem(itemId) {
+    return instance.get('search/all?id=' + itemId).then(({ data }) => data)
+  },
 }

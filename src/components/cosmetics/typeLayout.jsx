@@ -59,6 +59,7 @@ const TypeLayout = () => {
     "wrap",
   ];
   const mediumViewport = useMediaQuery("(min-width:900px)");
+
   return (
     <Grid
       container
@@ -77,11 +78,23 @@ const TypeLayout = () => {
           value={value}
           onChange={handleChange}
           aria-label="Vertical tabs example"
-          sx={{ borderRight: 1, borderColor: "divider" }}
+          sx={{
+            borderRight: 1,
+            borderColor: "divider",
+          }}
         >
           {types.map((type, index) => (
             // Label
-            <Tab label={type} key={index} {...a11yProps({ index })} />
+            <Tab
+              label={type}
+              key={index}
+              {...a11yProps({ index })}
+              sx={{
+                "&:hover": {
+                  backgroundColor: "#fce20012",
+                },
+              }}
+            />
           ))}
         </Tabs>
       </Grid>
