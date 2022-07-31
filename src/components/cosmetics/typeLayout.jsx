@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { Tabs, Tab, Box, useMediaQuery, Grid } from "@mui/material";
-import GoodsList from "./goods/goodsList";
+import GoodsList from "./goods/GoodsList";
 
 // MUI sample
 const TabPanel = (props) => {

@@ -4,7 +4,7 @@ import { ThemeProvider, createTheme } from '@mui/material';
 import { Routes, Route } from 'react-router-dom'
 import './App.css';
 import HeaderContainer from './components/cosmetics/headerLayout/HeaderLayout';
-import TypeLayout from './components/cosmetics/typeLayout';
+import TypeLayout from './components/cosmetics/TypeLayout';
 import HomePage from './components/home/homePage';
 
 

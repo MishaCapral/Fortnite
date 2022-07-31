@@ -1,60 +1,50 @@
-import { Palette } from "@mui/icons-material";
 import { Box, CircularProgress, Container, Typography } from "@mui/material";
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState } from "react";
 import { goodsAPI } from "../../../api/api";
-import Paginate from "../paginationAndSearch/paginate";
-import SearchField from "../paginationAndSearch/search";
+import Paginate from "../paginationAndSearch/Paginate";
+import SearchField from "../paginationAndSearch/Search";
 import GoodsCard from "./GoodsCard";
+import styles from "./goodsList.module.css";
 
 const GoodsList = ({ type }) => {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(30);
+  const [searchValue, setSearchValue] = useState("");
 
-  const getTypedItems = useCallback(async () => {
+  const getTypedItems = () => {
     setLoading(true);
-    const result = await goodsAPI.getTypeItems(type);
-    setItems(...[result.data]);
-    setLoading(false);
-  }, [type]);
+    goodsAPI.getTypeItems(type).then((response) => {
+      setItems(...[response.data]);
+      setLoading(false);
+    });
+  };
 
   useEffect(() => {
-    if (type !== null) {
-      getTypedItems(type);
-    }
+    getTypedItems(type);
   }, [type]);
 
-  // Pagination
-  const lastItemsIndex = currentPage * itemsPerPage;
-  const firstItemsIndex = lastItemsIndex - itemsPerPage;
-  const currentItemsPage = items.slice(firstItemsIndex, lastItemsIndex);
-
-  const totalItems = items.length;
-  const pageNumbers = Math.ceil(totalItems / itemsPerPage);
-
-  const paginate = (event, value) => setCurrentPage(value);
-
   // Search
-  const [searchValue, setSearchValue] = useState("");
   const searchOnChange = (e) => {
     setSearchValue(e.target.value);
   };
-  const fiteredItems = currentItemsPage.filter((itemSearch) => {
+  const filteredItems = items.filter((itemSearch) => {
     return itemSearch.name.toLowerCase().includes(searchValue.toLowerCase());
   });
 
+  // Pagination
+  const paginate = (event, value) => setCurrentPage(value);
+  const totalItems = items.length;
+  const pageNumbers = Math.ceil(totalItems / itemsPerPage);
+
+  const lastItemsIndex = currentPage * itemsPerPage;
+  const firstItemsIndex = lastItemsIndex - itemsPerPage;
+  const currentItemsPage = filteredItems.slice(firstItemsIndex, lastItemsIndex);
+
   if (loading) {
     return (
-      <Container
-        sx={{
-          width: "100%",
-          height: "100vh",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
+      <Container className={styles.loadingWrapper}>
         <Box>
           <CircularProgress size={50} />
         </Box>
@@ -63,45 +53,32 @@ const GoodsList = ({ type }) => {
   } else {
     return (
       <Container>
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <Typography
-            variant="h5"
-            sx={{ color: "var(--main-yellow)", width: "fit-content" }}
-          >
+        <Box className={styles.goodsWrapper}>
+          <Typography variant="h5" className={styles.headerTitle}>
             All fortnite {type}
           </Typography>
-          <Typography
-            variant="subtitle1"
-            sx={{ color: "var(--text-grey)", width: "fit-content" }}
-          >
+          <Typography variant="subtitle1" className={styles.headerSubtitle}>
             found {totalItems} items
           </Typography>
         </Box>
         <Box
+          className={styles.searchPaginateWrapper}
           sx={{
-            display: "flex",
             flexDirection: {
               xs: "column",
               sm: "row",
             },
-            justifyContent: "space-around",
-            alignItems: "center",
-            mb: "0.5rem",
-            width: "100%",
+            width: {
+              xs: "fit-content",
+              sm: "100%",
+            },
           }}
         >
           <SearchField onChange={searchOnChange} />
           <Paginate pageNumbers={pageNumbers} paginate={paginate} />
         </Box>
 
-        <GoodsCard fiteredItems={fiteredItems} />
+        <GoodsCard fiteredItems={currentItemsPage} />
       </Container>
     );
   }

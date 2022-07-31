@@ -1,0 +1,28 @@
+.loadingWrapper {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.goodsWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.headerTitle {
+  color: var(--main-yellow);
+  width: fit-content;
+}
+.headerSubtitle {
+  color: var(--text-grey);
+  width: fit-content;
+}
+.searchPaginateWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto;
+  /* flexdirection and width change in GoodsList component*/
+}
