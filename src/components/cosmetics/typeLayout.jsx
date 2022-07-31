@@ -1,5 +1,4 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { Tabs, Tab, Box, useMediaQuery, Grid } from "@mui/material";
 import GoodsList from "./goods/goodsList";
@@ -58,6 +57,7 @@ const TypeLayout = () => {
     "toy",
     "wrap",
   ];
+
   const mediumViewport = useMediaQuery("(min-width:900px)");
 
   return (

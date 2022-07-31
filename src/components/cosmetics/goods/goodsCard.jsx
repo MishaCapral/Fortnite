@@ -1,104 +1,43 @@
 import {
-  Box,
-  Button,
   Card,
   CardActionArea,
   CardContent,
   CardMedia,
   Grid,
-  Modal,
   Typography,
 } from "@mui/material";
-import { useCallback, useEffect, useState } from "react";
+import { useState } from "react";
 import { goodsAPI } from "../../../api/api";
 import ModalItem from "../modalItem/ModalItem";
+import styles from "./goodsCard.module.css";
 
 const GoodsCard = ({ fiteredItems }) => {
-  // const [currentItem, setCurrentItems] = useState([]);
-  // const [open, setOpen] = useState(false);
-  // const [itemId, setItemId] = useState([]);
-  // const handleOpen = (id) => {
-  //   setItemId(id);
-  //   setOpen(true);
-  // };
-  // const handleClose = () => setOpen(false);
-
-  // const getCurrentItem = useCallback(() => {
-  //   const result = goodsAPI.getItem(itemId);
-  //   setCurrentItems(...[result.data]);
-  // }, [itemId]);
-
-  // useEffect(() => {
-  //   getCurrentItem(itemId);
-  // }, [itemId]);
-  //------------------------------------
-
+  //logic modal window
   const [currentItem, setCurrentItems] = useState(null);
   const [open, setOpen] = useState(false);
-  //const [itemId, setItemId] = useState([]);
+
   const handleOpen = (id) => {
     goodsAPI.getItem(id).then((response) => {
       setCurrentItems(response.data[0]);
-      console.log(response);
       setOpen(true);
     });
   };
-
   const handleClose = () => setOpen(false);
 
-  // const getCurrentItem = useCallback(() => {
-  //   const result = goodsAPI.getItem(itemId);
-  //   setCurrentItems(...[result.data]);
-  // }, [itemId]);
-
-  // useEffect(() => {
-  //   getCurrentItem(itemId);
-  // }, [itemId]);
-
-  //console.log(itemId);
   return (
-    <Grid container alignItems="stretch" sx={{ rowGap: "0.6rem" }}>
+    <Grid container alignItems="stretch" className={styles.grid}>
       <ModalItem
         handleClose={handleClose}
         open={open}
         currentItem={currentItem}
       />
-
-      {/* <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box sx={style}>
-         
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            {currentItem ? currentItem.name : ""}
-          </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-          </Typography>
-        </Box>
-      </Modal> */}
-
       {fiteredItems.map((goods, index) => {
         return (
           <Grid item xs={4} sm={3} md={2} key={goods.id}>
-            <Card
-              sx={{
-                height: "100%",
-                maxWidth: "100%",
-                margin: "0.3rem",
-              }}
-            >
+            <Card className={styles.card}>
               <CardActionArea
                 onClick={() => handleOpen(goods.id)}
-                sx={{
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "flex-start",
-                  height: "100%",
-                }}
+                className={styles.cardActionArea}
               >
                 <CardMedia
                   component="img"
@@ -109,9 +48,8 @@ const GoodsCard = ({ fiteredItems }) => {
                   <Typography
                     gutterBottom
                     component="p"
+                    className={styles.cardContent}
                     sx={{
-                      color: "var(--text-grey)",
-                      fontWeight: "500",
                       fontSize: {
                         xs: "0.8em",
                         sm: "1em",

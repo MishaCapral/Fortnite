@@ -4,7 +4,7 @@ import { useEffect, useState, useCallback } from "react";
 import { goodsAPI } from "../../../api/api";
 import Paginate from "../paginationAndSearch/paginate";
 import SearchField from "../paginationAndSearch/search";
-import GoodsCard from "./goodsCard";
+import GoodsCard from "./GoodsCard";
 
 const GoodsList = ({ type }) => {
   const [items, setItems] = useState([]);
