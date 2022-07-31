@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import { useCallback, useEffect, useState } from "react";
 import { goodsAPI } from "../../../api/api";
-import ModalItem from "./ModalItem";
+import ModalItem from "../modalItem/ModalItem";
 
 const GoodsCard = ({ fiteredItems }) => {
   // const [currentItem, setCurrentItems] = useState([]);

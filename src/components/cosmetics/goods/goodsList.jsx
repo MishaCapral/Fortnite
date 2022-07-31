@@ -63,11 +63,24 @@ const GoodsList = ({ type }) => {
   } else {
     return (
       <Container>
-        <Box>
-          <Typography variant="h5" sx={{ color: "var(--main-yellow)" }}>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <Typography
+            variant="h5"
+            sx={{ color: "var(--main-yellow)", width: "fit-content" }}
+          >
             All fortnite {type}
           </Typography>
-          <Typography variant="subtitle1" sx={{ color: "var(--text-grey)" }}>
+          <Typography
+            variant="subtitle1"
+            sx={{ color: "var(--text-grey)", width: "fit-content" }}
+          >
             found {totalItems} items
           </Typography>
         </Box>

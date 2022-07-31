@@ -1,14 +1,35 @@
 .navlink {
   padding: 10px;
-  color: white;
+  color: var(--text-grey);
   text-decoration: none;
 }
 .navlinkMobile {
-  color: black;
+  color: rgb(255, 255, 255);
   text-decoration: none;
   margin: 0 auto;
 }
 .active-navlink {
   border-bottom: 2px solid white;
   color: red;
+}
+.drawerWrapper {
+  width: 100vw;
+  text-align: center;
+}
+.headerBannerMobile {
+  margin-block: 2rem;
+  text-align: center;
+}
+.wrapperDesktop {
+  display: flex;
+}
+/* icon button styled in HeaderLayout */
+/* box width baner styled in HeaderLayout */
+/* box width navlinks styled in HeaderLayout */
+/* drawer styled in HeaderLayout */
+.banner {
+  width: fit-content;
+}
+.contentContainer {
+  padding: 1rem;
 }

@@ -3,11 +3,20 @@
   --main-yellow: #fce200;
   --text-grey: rgba(255, 255, 255, 0.7);
 }
-.App {
+/* .App {
   text-align: center;
-}
+} */
 
 main,
 html {
   background-color: var(--background-main);
+}
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  cursor: pointer;
 }

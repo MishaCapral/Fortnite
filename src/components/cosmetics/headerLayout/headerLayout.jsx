@@ -1,24 +1,22 @@
-import React from "react";
-import { useState } from "react";
-import PropTypes from "prop-types";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Divider from "@mui/material/Divider";
-import Drawer from "@mui/material/Drawer";
-import IconButton from "@mui/material/IconButton";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-//import ListItemText from "@mui/material/ListItemText";
+import React, { useState } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
-import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
 import { NavLink, Outlet } from "react-router-dom";
+import {
+  Container,
+  AppBar,
+  Box,
+  Divider,
+  Drawer,
+  IconButton,
+  List,
+  ListItem,
+  ListItemButton,
+  Toolbar,
+  Typography,
+} from "@mui/material";
 import styles from "../headerLayout/header.module.css";
-import { Container } from "@mui/material";
 
 const drawerWidth = 600;
-//const navItems = ["Home", "Cosmetics", "News"];
 const navItems = [
   { name: "Home", to: "/" },
   { name: "Cosmetics", to: "/cosmetics" },
@@ -33,12 +31,9 @@ function HeaderContainer(props) {
   };
 
   const drawer = (
-    <Box
-      onClick={handleDrawerToggle}
-      sx={{ width: "100vw", textAlign: "center" }}
-    >
+    <Box onClick={handleDrawerToggle} className={styles.drawerWrapper}>
       {/* MOBILE */}
-      <Typography variant="h6" sx={{ my: 3 }}>
+      <Typography variant="h6" className={styles.headerBannerMobile}>
         Fortnite
       </Typography>
       <Divider />
@@ -64,7 +59,7 @@ function HeaderContainer(props) {
     window !== undefined ? () => window().document.body : undefined;
 
   return (
-    <Box sx={{ display: "flex" }}>
+    <Box className={styles.wrapperDesktop}>
       {/* DESKTOP */}
       <AppBar component="nav">
         <Container>
@@ -78,17 +73,17 @@ function HeaderContainer(props) {
             >
               <MenuIcon />
             </IconButton>
-            <Typography
-              variant="h6"
-              component="div"
+            <Box
               sx={{
                 flexGrow: 1,
                 display: { xs: "none", sm: "block" },
                 textAlign: "left",
               }}
             >
-              Fortnite
-            </Typography>
+              <Typography className={styles.banner} variant="h6">
+                Fortnite
+              </Typography>
+            </Box>
             <Box sx={{ display: { xs: "none", sm: "block" } }}>
               {navItems.map((item, index) => (
                 <NavLink to={item.to} key={index} className={styles.navlink}>
@@ -119,22 +114,13 @@ function HeaderContainer(props) {
           {drawer}
         </Drawer>
       </Box>
-      <Container component="main" sx={{ p: 2 }}>
+      <Container component="main" className={styles.contentContainer}>
         <Toolbar />
 
-        {/* main content*/}
+        {/* Main content*/}
         <Outlet />
       </Container>
     </Box>
   );
 }
-
-HeaderContainer.propTypes = {
-  /**
-   * Injected by the documentation to work in an iframe.
-   * You won't need it on your project.
-   */
-  window: PropTypes.func,
-};
-
 export default HeaderContainer;
