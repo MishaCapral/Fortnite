@@ -1,24 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
 
-function App() {
+import React from 'react';
+import { ThemeProvider, createTheme } from '@mui/material';
+import { Routes, Route } from 'react-router-dom'
+import './App.css';
+import HeaderContainer from './components/cosmetics/headerLayout/HeaderLayout';
+import TypeLayout from './components/cosmetics/TypeLayout';
+import HomePage from './components/home/homePage';
+
+
+const darkTheme = createTheme({
+  palette: {
+    mode: 'dark',
+    background: { paper: '#2f3136' },
+    primary: { main: '#fce200' },
+    text: { primary: '#fce200' }
+  },
+
+});
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={darkTheme}>
+      <div className="App">
+        <Routes>
+          <Route path='/' element={<HeaderContainer />}>
+            <Route index element={<HomePage />} />
+            <Route path='cosmetics' element={< TypeLayout />} />
+          </Route>
+        </Routes>
+      </div>
+    </ThemeProvider>
   );
 }
 

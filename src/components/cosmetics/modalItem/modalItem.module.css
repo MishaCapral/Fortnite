@@ -1,0 +1,36 @@
+.modalWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.wrapper {
+  /*box-shadow: 5;*/
+  padding: 4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 1rem;
+  /* flex-direction logic realised in component Box sx*/
+}
+.wrapperText {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.grey {
+  color: var(--text-grey);
+}
+.white {
+  color: white;
+  text-align: center;
+}
+.yellow {
+  color: var(--main-yellow);
+  text-align: center;
+}
+.closeBtn {
+  position: absolute !important;
+  top: 1rem;
+  right: 1rem;
+}
