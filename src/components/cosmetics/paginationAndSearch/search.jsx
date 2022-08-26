@@ -1,8 +1,9 @@
 import React from "react";
-import { Box, TextField } from "@mui/material";
 
-const SearchField = (props) => {
-  const { onChange, value } = props;
+import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
+
+const SearchField = ({ onChange, value }) => {
   return (
     <Box>
       <TextField
